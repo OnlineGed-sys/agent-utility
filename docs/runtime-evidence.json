@@ -1,0 +1,12 @@
+{
+  "runtime": "workerd",
+  "external_services": "simulated",
+  "buyer_statuses": [402, 200],
+  "first_cache": "miss",
+  "second_cache": "hit",
+  "upstream_calls": 2,
+  "atomic_claim_winners": 1,
+  "quota_permits": 500,
+  "paid_metric_rows": 2,
+  "settlement_proven_onchain": false
+}

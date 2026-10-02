@@ -1,0 +1,36 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agent-utility",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "vars": {
+    "PUBLIC_ORIGIN": "https://REPLACE_WITH_WORKER_HOST",
+    "PAY_TO_ADDRESS": "",
+    "KNOWN_BUYER_ADDRESSES": "",
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "PAYMENT_CLAIMS", "class_name": "PaymentClaims" },
+      { "name": "COMPANY_CACHE", "class_name": "CompanyCache" },
+      { "name": "UPSTREAM_QUOTA", "class_name": "UpstreamQuota" },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["CompanyCache", "UpstreamQuota", "PaymentClaims"],
+    },
+  ],
+  "d1_databases": [
+    {
+      "binding": "METRICS",
+      "database_name": "agent-utility-metrics",
+      "database_id": "REPLACE_WITH_D1_ID",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "triggers": { "crons": ["0 3 * * *"] },
+}
